@@ -10,7 +10,7 @@ app.get('/', function(req, res) {
   obtain(url, function(err, fileName) {
     if(err) throw err;
 
-    unoconv.convert(fileName, 'png', {exportStr: 'PageRange=1-1'}, function(err, pngBuf) {
+    unoconv.convert(fileName, 'png', {exportStr: 'PageRange=1-1', stdout: true}, function(err, pngBuf) {
       res.header('Content-Type', 'image/png');
       res.send(pngBuf);
     });
