@@ -9,6 +9,7 @@ sslRootCas.inject();
 
 app.get('/', function(req, res) {
   var url = req.params.url;
+  console.log('requesting', url);
   request.get(url, function(err, docRes) {
     if(err) throw err;
     var type = docRes.header('Content-Type');
