@@ -9,11 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "document-thumbnail": "git://github.com/ashaffer/document-thumbnail",
     "express": "^4.11.0",
     "mime": "^1.2.11",
     "morgan": "^1.5.1",
-    "ssl-root-cas": "^1.1.7",
     "superagent": "^0.21.0",
     "unoconv": "git://github.com/colearnr/node-unoconv",
     "uuid": "^2.0.1"
