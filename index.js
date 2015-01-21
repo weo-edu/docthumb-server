@@ -9,17 +9,21 @@ sslRootCas.inject();
 
 app.get('/', function(req, res) {
   var url = req.params.url;
-  request.get(url, function(err, res) {
+  request.get(url, function(err, docRes) {
     if(err) throw err;
-    var type = res.header('Content-Type');
+    var type = docRes.header('Content-Type');
     var ext = mime.extension(type);
-    var buf = res.body;
+    var buf = docRes.body;
     var name = uuid.v4() + '.' + ext;
-    fs.writeFileSync(name, buf);
-    docThumb(name, function(err, pngBuf) {
-      res.header('Content-Type', 'image/png');
-      res.send(pngBuf);
-    });
+
+    docRes
+      .pipe(fs.createWriteStream(name))
+      .on('end', function() {
+        docThumb(name, function(err, pngBuf) {
+          res.header('Content-Type', 'image/png');
+          res.send(pngBuf);
+        });
+      });
   });
 });
 
