@@ -5,8 +5,14 @@ var obtain = require('./lib/obtain');
 app.get('/', function(req, res) {
   var url = req.query.url;
 
+  console.log('obtaining', url);
   obtain(url, function(err, fileName) {
+    if(err) throw err;
+
+    console.log('obtained', fileName);
     docThumb(fileName, function(err, pngBuf) {
+      if(err) throw err;
+
       res.header('Content-Type', 'image/png');
       res.send(pngBuf);
     });
