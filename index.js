@@ -2,7 +2,6 @@ var app = require('express')();
 var obtain = require('./lib/obtain');
 var thumb = require('./lib/thumb');
 
-unoconv.listen();
 app.get('/', function(req, res) {
   var url = req.query.url;
 
