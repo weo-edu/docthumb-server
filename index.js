@@ -8,7 +8,7 @@ var sslRootCas = require('ssl-root-cas/latest');
 sslRootCas.inject();
 
 app.get('/', function(req, res) {
-  var url = req.params.url;
+  var url = req.query.url;
   console.log('requesting', url);
   request.get(url, function(err, docRes) {
     if(err) throw err;
