@@ -12,6 +12,7 @@
     "document-thumbnail": "git://github.com/ashaffer/document-thumbnail",
     "express": "^4.11.0",
     "mime": "^1.2.11",
+    "ssl-root-cas": "^1.1.7",
     "superagent": "^0.21.0",
     "uuid": "^2.0.1"
   }

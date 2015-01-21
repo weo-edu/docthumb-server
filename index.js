@@ -4,8 +4,11 @@ var request = require('superagent');
 var docThumb = require('document-thumbnail');
 var uuid = require('uuid');
 
+var sslRootCas = require('ssl-root-cas/latest');
+sslRootCas.inject();
+
 app.get('/', function(req, res) {
-  var url = req.param('url');
+  var url = req.params.url;
   request.get(url, function(err, res) {
     if(err) throw err;
     var type = res.header('Content-Type');
