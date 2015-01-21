@@ -1,30 +1,15 @@
 var app = require('express')();
-var mime = require('mime');
-var request = require('superagent');
 var docThumb = require('document-thumbnail');
-var uuid = require('uuid');
-
-var sslRootCas = require('ssl-root-cas/latest');
-sslRootCas.inject();
+var obtain = require('./lib/obtain');
 
 app.get('/', function(req, res) {
   var url = req.query.url;
-  console.log('requesting', url);
-  request.get(url, {rejectUnauthorized: false}, function(err, docRes) {
-    if(err) throw err;
-    var type = docRes.header('Content-Type');
-    var ext = mime.extension(type);
-    var buf = docRes.body;
-    var name = uuid.v4() + '.' + ext;
 
-    docRes
-      .pipe(fs.createWriteStream(name))
-      .on('end', function() {
-        docThumb(name, function(err, pngBuf) {
-          res.header('Content-Type', 'image/png');
-          res.send(pngBuf);
-        });
-      });
+  obtain(url, function(err, fileName) {
+    docThumb(fileName, function(err, pngBuf) {
+      res.header('Content-Type', 'image/png');
+      res.send(pngBuf);
+    });
   });
 });
 
