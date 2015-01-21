@@ -23,3 +23,7 @@ app.get('/', function(req, res) {
 app.get('/pdf', function(req, res) {
 
 });
+
+app.listen(80, function() {
+  console.log('listening');
+});
