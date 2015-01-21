@@ -10,7 +10,7 @@ app.get('/', function(req, res) {
     if(err) throw err;
 
     console.log('obtained', fileName);
-    docThumb(fileName, function(err, pngBuf) {
+    docThumb(fileName, 'tmp.png', function(err, pngBuf) {
       if(err) throw err;
 
       res.header('Content-Type', 'image/png');
