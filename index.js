@@ -10,7 +10,7 @@ sslRootCas.inject();
 app.get('/', function(req, res) {
   var url = req.query.url;
   console.log('requesting', url);
-  request.get(url, function(err, docRes) {
+  request.get(url, {rejectUnauthorized: false}, function(err, docRes) {
     if(err) throw err;
     var type = docRes.header('Content-Type');
     var ext = mime.extension(type);
