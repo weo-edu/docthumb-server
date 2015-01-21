@@ -1,7 +1,6 @@
 var app = require('express')();
-var docThumb = require('document-thumbnail');
 var obtain = require('./lib/obtain');
-var unoconv = require('unoconv');
+var thumb = require('./lib/thumb');
 
 unoconv.listen();
 app.get('/', function(req, res) {
@@ -10,17 +9,13 @@ app.get('/', function(req, res) {
   obtain(url, function(err, fileName) {
     if(err) throw err;
 
-    unoconv.convert(fileName, 'png', {exportStr: 'PageRange=1-1', stdout: true}, function(err, pngBuf) {
+    thumb(fileName, function(err, pngBuf) {
+      if(err) throw err;
+
       res.header('Content-Type', 'image/png');
       res.send(pngBuf);
     });
-    // docThumb(fileName, function(err, pngBuf) {
-    //   if(err) throw err;
-
-    //   res.header('Content-Type', 'image/png');
-    //   res.send(pngBuf);
-    // });
-  });
+ });
 });
 
 app.listen(80, function() {
