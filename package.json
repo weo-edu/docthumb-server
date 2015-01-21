@@ -14,6 +14,7 @@
     "mime": "^1.2.11",
     "ssl-root-cas": "^1.1.7",
     "superagent": "^0.21.0",
+    "unoconv": "git://github.com/colearnr/node-unoconv",
     "uuid": "^2.0.1"
   }
 }
